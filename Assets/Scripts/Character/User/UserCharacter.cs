@@ -30,7 +30,7 @@ public class UserCharacter : MonoBehaviour, IBaseCharacter
         CurrentHealth -= finalDamage;
     }
 
-    // TODO - calculate values from DB
+    // TODO - calculate values from user's preferences
     private void Initialize()
     {
         MaxHealth = 1000;
