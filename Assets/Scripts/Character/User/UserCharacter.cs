@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,19 @@ public class UserCharacter : MonoBehaviour, IBaseCharacter
 
     private List<IDefence> _defences { get; set; }
 
+    private bool _isInitialized { get; set; }
 
-    private void Start()
+
+    public void Initialize(ICollectibleCharacter collectibleCharacter)
     {
-        Initialize();
-    }
+        if (_isInitialized)
+            throw new Exception($"Character is initialized before!");
 
+        MaxHealth = collectibleCharacter.MaxHealth;
+        CurrentHealth = MaxHealth;
+
+        _defences = collectibleCharacter.Defences.ToList();
+    }
 
     public void TakeDamage(IHit hit)
     {
@@ -30,19 +38,4 @@ public class UserCharacter : MonoBehaviour, IBaseCharacter
         CurrentHealth -= finalDamage;
     }
 
-    // TODO - calculate values from user's preferences
-    private void Initialize()
-    {
-        MaxHealth = 1000;
-        CurrentHealth = MaxHealth;
-
-        _defences = new List<IDefence>
-        {
-            new Defence()
-            {
-                DamageType = DamageType.Physic,
-                RelativeDefence = 0.2f
-            }
-        };
-    }
 }
