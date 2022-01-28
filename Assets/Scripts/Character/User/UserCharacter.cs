@@ -15,13 +15,15 @@ public class UserCharacter : MonoBehaviour, IBaseCharacter
 
     private List<IDefence> _defences { get; set; }
 
-    private bool _isInitialized { get; set; }
+    private bool _isInitialized { get; set; } = false;
 
 
     public void Initialize(ICollectibleCharacter collectibleCharacter)
     {
         if (_isInitialized)
             throw new Exception($"Character is initialized before!");
+
+        _isInitialized = true;
 
         MaxHealth = collectibleCharacter.MaxHealth;
         CurrentHealth = MaxHealth;
