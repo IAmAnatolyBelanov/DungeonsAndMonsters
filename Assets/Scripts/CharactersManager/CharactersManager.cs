@@ -37,13 +37,11 @@ public class CharactersManager : MonoBehaviour
 
     private void LoadPrefabs()
     {
-        for (int i = 0; i < UserPreferences.ActiveDeck.Characters.Length; i++)
-        {
-            var collectibleCharacter = UserPreferences.ActiveDeck.Characters[i];
+        var collectibleCharacters = UserPreferences.ActiveDeck.Characters;
 
-            if (collectibleCharacter != null)
-                _prefabs[i] = Resources.Load<EntityRenderer>(collectibleCharacter.PrefabPath);
-        }
+        for (int i = 0; i < collectibleCharacters.Length; i++)
+            if (collectibleCharacters[i] != null)
+                _prefabs[i] = Resources.Load<EntityRenderer>(collectibleCharacters[i].PrefabPath);
     }
 
     private void SpawnCharacter(EntityRenderer prefab, int sortingLayerID)
