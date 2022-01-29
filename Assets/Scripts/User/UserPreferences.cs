@@ -75,5 +75,7 @@ public static class UserPreferences
 
     public static IEnumerable<Deck> Decks { get; private set; }
 
-    public static Deck ActiveDeck => Decks.FirstOrDefault(x => x.IsActive) ?? Decks.First();
+    public static Deck ActiveDeck => Decks.FirstOrDefault(x => x.IsActive)
+        ?? Decks.FirstOrDefault()
+        ?? throw new NullReferenceException($"{nameof(Decks)} is empty!");
 }

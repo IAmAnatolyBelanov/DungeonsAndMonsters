@@ -5,7 +5,7 @@ using System;
 
 public class CharactersManager : MonoBehaviour
 {
-    private readonly EntityRenderer[] _prefabs = new EntityRenderer[3];
+    private readonly ICollectibleCharacter[] _collectibleCharacters = new ICollectibleCharacter[3];
 
     private readonly int[] _layersIds = new int[3];
 
@@ -20,12 +20,12 @@ public class CharactersManager : MonoBehaviour
 
     public void SpawnUsersCharacters()
     {
-        if (_prefabs.All(x => x == null))
-            throw new ArgumentNullException($"{nameof(_prefabs)} is empty");
+        if (_collectibleCharacters.All(x => x == null))
+            throw new ArgumentNullException($"{nameof(_collectibleCharacters)} is empty");
 
-        for (int i = 0; i < _prefabs.Length; i++)
-            if (_prefabs[i] != null)
-                SpawnCharacter(_prefabs[i], _layersIds[i]);
+        for (int i = 0; i < _collectibleCharacters.Length; i++)
+            if (_collectibleCharacters[i] != null)
+                SpawnCharacter(_collectibleCharacters[i], _layersIds[i]);
     }
 
     private void FillLayersIds()
@@ -41,13 +41,17 @@ public class CharactersManager : MonoBehaviour
 
         for (int i = 0; i < collectibleCharacters.Length; i++)
             if (collectibleCharacters[i] != null)
-                _prefabs[i] = Resources.Load<EntityRenderer>(collectibleCharacters[i].PrefabPath);
+                _collectibleCharacters[i] = collectibleCharacters[i];
     }
 
-    private void SpawnCharacter(EntityRenderer prefab, int sortingLayerID)
+    private void SpawnCharacter(ICollectibleCharacter collectibleCharacter, int sortingLayerID)
     {
         // TODO - Setup coordinates
+        var prefab = Resources.Load<EntityRenderer>(collectibleCharacter.PrefabPath);
         var character = GameObject.Instantiate(prefab);
         character.SortingLayerID = sortingLayerID;
+
+        var userCharacter = character.gameObject.GetComponent<UserCharacter>();
+        userCharacter.Initialize(collectibleCharacter);
     }
 }
