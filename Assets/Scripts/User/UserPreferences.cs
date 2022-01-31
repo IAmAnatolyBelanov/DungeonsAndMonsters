@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public static class UserPreferences
@@ -35,7 +36,7 @@ public static class UserPreferences
 
         var preferencesDtoJson = File.ReadAllText(_path);
 
-        var preferencesDto = Newtonsoft.Json.JsonConvert.DeserializeObject<UserPreferencesDto>(preferencesDtoJson);
+        var preferencesDto = JsonConvert.DeserializeObject<UserPreferencesDto>(preferencesDtoJson);
 
         FillPropertiesFromDto(preferencesDto);
     }
@@ -50,7 +51,7 @@ public static class UserPreferences
             Money = Money
         };
 
-        var dtoJson = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+        var dtoJson = JsonConvert.SerializeObject(dto);
 
         File.WriteAllText(_path, dtoJson);
     }
