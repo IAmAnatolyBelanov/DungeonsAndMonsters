@@ -350,6 +350,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51aada02a3c57ee4d936c233b0f6ac5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabBack: {fileID: 187931423144922759, guid: d08f3d19e17a9694895aede11c33036c, type: 3}
-  _prefabMiddle: {fileID: 3750596748520364266, guid: 03106865ddaee394189cffd4b098022b, type: 3}
-  _prefabFront: {fileID: 1604014853836665192, guid: 300b7ceb5cdca704da5923cf30188f75, type: 3}
