@@ -16,7 +16,7 @@ public class CollectibleCharacter : ICollectibleCharacter
 
     public CollectibleCharacter()
     {
-
+ 
     }
 
     [JsonConstructor]
